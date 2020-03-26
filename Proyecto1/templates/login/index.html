@@ -1,0 +1,57 @@
+<! doctype html />
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    {% load bootstrap4 %}
+
+    {% bootstrap_css %}
+
+
+</head>
+
+<body>
+    <br>
+    <br>
+    <div class="mx-auto border  border-dark" style="width:200px">
+        <br>
+        <div class="container">
+            <form action=" " method="POST">
+                {% csrf_token %}
+                <div class="form-group" style="text-align: center">
+                    <img src="https://sic.cultura.gob.mx/images/63227" style="width: 100px" class="rounded-pill">
+                    <br>
+                    <br>
+                    <input type="text" class="form-control " placeholder="Correo" name="user" required>
+                    <br>
+                    <br>
+                    <input type="password" class="form-control" placeholder="Contraseña" name="password" required>
+                    <br>
+                    </div>
+                <div style="text-align: center">
+                    <button type="submit" class="btn btn-secondary">Iniciar</button>
+                    <br>
+                    {% if error%}
+                    <div class="alert alert-warning" role="alert">
+                        {{error}}
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div style = "text-align:center;">
+        <a href = "{% url 'Login:Landing'%}">Ir a landing</a>
+      </div>
+    {# JS y jQuery Bootstrap #}
+    {% bootstrap_javascript jquery='full' %}
+</body>
+
+</html>

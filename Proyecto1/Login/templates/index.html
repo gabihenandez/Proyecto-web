@@ -1,0 +1,63 @@
+{% load static %}
+<! doctype html />
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{% static 'desing/style.css' %}" type="text/css" rel="stylesheet">
+
+
+    {% load bootstrap4 %}
+
+    {% bootstrap_css %}
+
+
+</head>
+
+<body >
+    <br>
+    <br>
+    <div class="logo">
+        <br>
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group" style="text-align: center">
+                    <img src="https://as2.ftcdn.net/jpg/02/29/75/83/500_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg" style="width: 150px" class="rounded-pill">
+                    <br>
+                    <br>
+                    <input type="text" class="form-control " placeholder="Usuario" name="user" required>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="password" class="form-control" placeholder="Contraseña" name="password" required>
+                    <br>
+                    <br>
+                    </div>
+                    <div style="text-align: center">
+                    <button type="submit" class="btn btn-secondary">Iniciar</button>
+                    <br>
+                    <br>
+                    {% if error%}
+                    <div class="alert alert-warning" role="alert">
+                        {{error}}
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+        <div style = "text-align:center;">
+            <a href = "{% url 'Landing:Landing'%}">Ir a landing</a>
+            <br>
+            <a href = "{% url 'Registro:registro'%}">Registro</a>
+          </div>
+    </div>
+    
+    {# JS y jQuery Bootstrap #}
+    {% bootstrap_javascript jquery='full' %}
+</body>
+
+</html>

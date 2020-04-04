@@ -2,47 +2,45 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect
- 	#LLEGA A LA VISTA Y LA EJECUTA
-#  def Index (request):
-#      return render(request,'index.html',{})
-
-#  def Landing (request):
-#     return render(request,'Landing.html',{})
+from django.contrib.auth import login as login_django
+ 
 
 class LoginClass(View):
 
-    templates = 'login/index.html'
-    template_ok = 'Landing/Landing.html'
-    def get(self, request , *args , **kwargs):
+    templates='index.html'
 
-        return render(request,self.templates, {})
-    def post(self,request,*args,**kwargs):
+    def get(self,request, *args,**kwargs,):
+        if request.user.is_authenticated:
+            next_url = request.GET.get('next')
+            if next_url:
+                return redirect(next_url)
+            else:
+                return redirect('Dashboard:dashboard')
+        return render(request, self.templates,{})
 
-        user_post = request.POST['user'] #Extraer lo que tiene la vista .POST
-        password_post = request.POST['password']
-
-        user_session = authenticate(username = user_post , password = password_post)
-        #metodo de autentificacion
+    def post(self,request, *args,**kwargs,):
+        userPost=request.POST['user']
+        passwordPost=request.POST['password']
+        user_session = authenticate(username = userPost, password = passwordPost)
+        #ACÁ LO VALIDO
         if user_session is not None:
-            return redirect ('Login:Dashboard')
+            login_django(
+                request, user_session
+            )
+            next_url = request.GET.get('next')
+            print(user_session.username)
+            if next_url:
+                return redirect(next_url)
+            else:
+                return redirect('Dashboard:dashboard')
         else:
-            self.message = 'usuario o contraseña incorrecto'
+            self.message = 'Usuario o contraseña incorrecto'
 
-        return render(request, self.templates, self.get_context())
-
-    def get_context(self):
-        return {
+        return render(request, self.templates,self.getContext())
+    def getContext(self):
+        return{
             'error':self.message,
         }
-    
-class LandingClass(View):
-    template_ok = 'Landing/Landing.html'
-    def get(self, request, * args, ** kwargs):
-        return render(request,self.template_ok,{})
 
-class DashboardClass(View):
-    template_ok= 'Dashboard/dashboard.html'
-    def get(self,request, * args, ** kwargs):
-        return render(request,self.template_ok,{})
 
 

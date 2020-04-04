@@ -1,0 +1,74 @@
+{% load static %}
+<! doctype html />
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{% static 'desing/style.css' %}" type="text/css" rel="stylesheet">
+
+    {% load bootstrap4 %}
+
+    {% bootstrap_css %}
+
+</head>
+
+<body>
+    <div class="registro">
+        <br>
+        <div class="container">
+            <form method="POST">
+                <h1 style = "text-align:center;">Registro</h1>
+                <br>
+                
+                {% csrf_token %}
+                    {% if form_get.username.value %}
+                    {{ form_get.username }}
+                    {% else %}
+                    {{ form_get.username }}
+                    {% endif %}
+                    <br>
+                    {% if form_get.first_name.value %}
+                    {{ form_get.first_name }}
+                    {% else %}
+                    {{ form_get.first_name }}
+                    {% endif %}
+                    <br>
+                    {% if form_get.last_name.value %}
+                    {{ form_get.last_name }}
+                    {% else %}
+                    {{ form_get.last_name }}
+                    {% endif %}
+                    <br>
+                    {% if form_get.password.value %}
+                    {{ form_get.password }}
+                    {% else %}
+                    {{ form_get.password }}
+                    {% endif %}
+                    <br>
+                    {% if form_get.email.value %}
+                    {{ form_get.email }}
+                    {% else %}
+                    {{ form_get.email }}
+                    {% endif %}
+                    <br>
+                    <br>
+                    <div style = "text-align:center;" >
+                        <button type="submit" class="btn btn-secondary">Registrate </button>
+                        <br>
+                        <br>    
+                    </div>
+                    <div style = "text-align:center;">
+                        <a href = "{% url 'Landing:Landing'%}">Ir a landing</a>
+                       
+                      </div>  
+            </form>
+        </div>
+    </div>
+    
+    {# JS y jQuery Bootstrap #}
+    {% bootstrap_javascript jquery='full' %}
+</body>
+</html>

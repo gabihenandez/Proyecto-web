@@ -7,5 +7,5 @@ from Dashboard.views import DashboardClass
 
 app_name = 'Dashboard'
 urlpatterns = [
-    path('Dashboard',DashboardClass.as_view(), name = 'Dashboard')
+    path('',DashboardClass.as_view(), name = 'dashboard'),
 ]
